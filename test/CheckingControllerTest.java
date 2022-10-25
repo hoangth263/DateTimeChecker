@@ -11,7 +11,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
 
 /**
  *
@@ -62,6 +65,7 @@ public class CheckingControllerTest {
         HttpServletResponse response = null;
         CheckingController instance = new CheckingController();
         instance.form_hanler(request, response);
+        when(request.getParameter("day")).thenReturn("31");
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -69,43 +73,6 @@ public class CheckingControllerTest {
     /**
      * Test of doGet method, of class CheckingController.
      */
-    @Test
-    public void testDoGet() throws Exception {
-        System.out.println("doGet");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        CheckingController instance = new CheckingController();
-        instance.doGet(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of doPost method, of class CheckingController.
-     */
-    @Test
-    public void testDoPost() throws Exception {
-        System.out.println("doPost");
-        HttpServletRequest request = null;
-        HttpServletResponse response = null;
-        CheckingController instance = new CheckingController();
-        instance.doPost(request, response);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getServletInfo method, of class CheckingController.
-     */
-    @Test
-    public void testGetServletInfo() {
-        System.out.println("getServletInfo");
-        CheckingController instance = new CheckingController();
-        String expResult = "";
-        String result = instance.getServletInfo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
     
 }

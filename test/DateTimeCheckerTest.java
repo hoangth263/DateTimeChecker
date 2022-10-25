@@ -28,9 +28,10 @@ public class DateTimeCheckerTest {
             this.expResult = expResult;
         }
 
-        public TestCase(byte day, byte month, boolean expBooleanResult) {
+        public TestCase(byte month, short year, byte day, boolean expBooleanResult) {
             this.day = day;
             this.month = month;
+            this.year = year;
             this.expBooleanResult = expBooleanResult;
         }
 
@@ -102,8 +103,8 @@ public class DateTimeCheckerTest {
         allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2022"), Byte.parseByte("28")));
         allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("1900"), Byte.parseByte("28")));
         for (TestCase testCase : allcase) {
-            assertEquals("Test case: {"+testCase.getMonth()+", "+testCase.getYear()+", "+testCase.getExpResult()+"} fail."
-                    , testCase.getExpResult(), DateTimeChecker.checkDayInMonth(testCase.getMonth(),testCase.getYear()));
+            assertEquals("Test case: {" + testCase.getMonth() + ", " + testCase.getYear() + ", " + testCase.getExpResult() + "} fail.",
+                     testCase.getExpResult(), DateTimeChecker.checkDayInMonth(testCase.getMonth(), testCase.getYear()));
         }
     }
 
@@ -113,7 +114,36 @@ public class DateTimeCheckerTest {
     @Test
     public void testIsValidDate() {
         System.out.println("isValidDate");
-        
+        ArrayList<TestCase> allcase = new ArrayList<>();
+        allcase.add(new TestCase(Byte.parseByte("1"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("3"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("4"), Short.parseShort("2022"), Byte.parseByte("30"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("4"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("5"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("6"), Short.parseShort("2022"), Byte.parseByte("30"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("6"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("7"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("8"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("9"), Short.parseShort("2022"), Byte.parseByte("30"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("9"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("10"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("11"), Short.parseShort("2022"), Byte.parseByte("30"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("11"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("12"), Short.parseShort("2022"), Byte.parseByte("31"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2000"), Byte.parseByte("30"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2000"), Byte.parseByte("31"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2000"), Byte.parseByte("29"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2001"), Byte.parseByte("29"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2001"), Byte.parseByte("28"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2022"), Byte.parseByte("29"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("2022"), Byte.parseByte("28"), Boolean.parseBoolean("true")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("1900"), Byte.parseByte("29"), Boolean.parseBoolean("false")));
+        allcase.add(new TestCase(Byte.parseByte("2"), Short.parseShort("1900"), Byte.parseByte("28"), Boolean.parseBoolean("true")));
+        for (TestCase testCase : allcase) {
+            assertEquals("Test IsValidDate case: {" + testCase.getMonth() + ", " + testCase.getYear() + ", " + testCase.getDay() + ", " + testCase.isExpBooleanResult() + "} fail.",
+                   testCase.isExpBooleanResult(), 
+                   DateTimeChecker.isValidDate(testCase.getDay(), testCase.getMonth(), testCase.getYear()));
+        }
 
     }
 
